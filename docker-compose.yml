@@ -1,0 +1,18 @@
+
+version: '3'
+services:
+  mongo:
+    image: mongo:3
+    ports:
+      - 27017:27017
+  sailsapp:
+    build: ./sails-app
+    ports:
+      - 1337:1337
+    depends_on:
+      - mongo
+    environment:
+      - NODE_ENV=dev
+    volumes:
+      - ./sails-app:/usr/src/sails-app
+      - /usr/src/sails-app/node_modules
